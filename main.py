@@ -1,12 +1,9 @@
-from tkinter import *
+class Person():
+    def __init__(self,name,surname):
+        self.name = name
+        self.surname = surname
 
-
-class Ball():
-    def __int__(self):
-        pass
-
-    pass
-
-
-if __name__ == '__main__':
-    pass
+p = Person("Bob", "Marley")
+p1 = Person("Jack", "Daniels")
+print(p.name, p.surname)
+print(p1.name, p1.surname)
