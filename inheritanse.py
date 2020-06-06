@@ -27,6 +27,7 @@ class Person:
     army = []
     good_army = []
     bad_army = []
+    heroes = []
 
     def __init__(self, team):  # инит основнового класса с рандомом ИД и команды
         self.id = id(self)
@@ -42,6 +43,7 @@ class Person:
 class Hero(Person):
     def __init__(self, name, team, level=0):  # инит класса герой
         Person.__init__(self, team)
+        self.id = id(self)
         self.name = name
         self.level = level
 
@@ -52,16 +54,15 @@ class Hero(Person):
 
 class Solider(Person):  # Инит класс солдата
     def follow(self):  # инит следовать за героем
-        pass
+        return "Солдат команды {} c ID:{} следует за героем с ИД: ".format(self.team, self.id)
 
 
 # инит героев
-heroes = [
-    Hero("Gendalf", 'good'),
-    Hero("Sauron", 'bad')
-]
+Person.heroes = [
+    Hero("Gedalf", "good"),
+    Hero("Sauron", "bad"), ]
 
-for i in range(1, 10):
+for i in range(1, 101):
     Person.army.append(Solider(random.choice(['good', 'bad'])))
 
 for i in Person.army:
@@ -70,3 +71,20 @@ for i in Person.army:
     else:
         Person.bad_army.append(i)
 
+if len(Person.good_army) > len(Person.bad_army):
+    Person.heroes[0].level_up()
+    print(f"Герой:{Person.heroes[0].name} с ИД{Person.heroes[1].id}, Уровень: {Person.heroes[0].level}")
+    print(f"Размер армии: {len(Person.good_army)}")
+    print(f"Войска на поле боя: {len(Person.army)}")
+elif len(Person.good_army) < len(Person.bad_army):
+    Person.heroes[1].level_up()
+    print(f"Герой:{Person.heroes[1].name} с ИД{Person.heroes[1].id}, Уровень: {Person.heroes[1].level}")
+    print(f"Размер армии: {len(Person.bad_army)}")
+    print(f"Войска на поле боя: {len(Person.army)}")
+else:
+    print("Армии равны")
+    print(f"Войска на поле боя: {len(Person.army)}")
+
+print(Person.heroes[0].id)
+print(Person.heroes[1].id)
+print(Solider.army[0].follow())
